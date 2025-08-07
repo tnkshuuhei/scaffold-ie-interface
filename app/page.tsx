@@ -80,6 +80,7 @@ export default function Home() {
               recipients={routes[0].routes}
               totalBalance={formatEther(splitBalance?.balance as bigint)}
               allocations={routes[0].allocations}
+              rootSplits={routes[0].rootSplits as string}
             />
           )}
         </div>

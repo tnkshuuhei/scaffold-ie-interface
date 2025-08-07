@@ -4,10 +4,12 @@ import Link from "next/link";
 
 export const FlowVisualization = ({
   recipients,
+  rootSplits,
   totalBalance,
   allocations,
 }: {
   recipients: string[];
+  rootSplits: string;
   totalBalance: string;
   allocations: number[];
 }) => {
@@ -95,6 +97,16 @@ export const FlowVisualization = ({
       };
     });
 
+    // Add source endpoint
+    svg
+      .append("circle")
+      .attr("cx", sourceX)
+      .attr("cy", centerY)
+      .attr("r", 8)
+      .attr("fill", "#ffffff")
+      .attr("stroke", "#374151")
+      .attr("stroke-width", 2);
+
     // Draw flows
     flows.forEach((flow, index) => {
       const pathData = [];
@@ -147,6 +159,18 @@ export const FlowVisualization = ({
           setHoveredFlow(null);
           d3.select(this).transition().duration(200).attr("opacity", 0.8);
         });
+
+      // Add recipient endpoint
+      flowGroup
+        .append("circle")
+        .attr("cx", targetX)
+        .attr("cy", flow.targetY)
+        .attr("r", 6)
+        .attr("fill", flow.color.end)
+        .attr("stroke", "#ffffff")
+        .attr("stroke-width", 2)
+        .attr("opacity", hoveredFlow === index ? 1 : 0.9)
+        .style("transition", "all 0.3s ease");
 
       // Add flow allocation label
       flowGroup
@@ -203,7 +227,14 @@ export const FlowVisualization = ({
           <div className="text-2xl font-bold text-white">
             {totalBalance} ETH
           </div>
-          <div className="text-gray-300 text-sm">ETH Total</div>
+          <div className="text-gray-300 text-sm">Total</div>
+          <Link
+            href={`https://app.splits.org/accounts/${rootSplits}/?chainId=11155111`}
+            target="_blank"
+            className="hover:underline text-gray-300"
+          >
+            {rootSplits.slice(0, 6)}...{rootSplits.slice(-4)}
+          </Link>
         </div>
       </div>
 
