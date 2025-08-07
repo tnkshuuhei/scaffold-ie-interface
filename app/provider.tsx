@@ -9,7 +9,7 @@ import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 const queryClient = new QueryClient();
 
-const config = createConfig({
+export const config = createConfig({
   chains: [sepolia],
   transports: {
     [sepolia.id]: http(),
