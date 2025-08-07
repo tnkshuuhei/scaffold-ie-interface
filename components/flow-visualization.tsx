@@ -102,10 +102,10 @@ export const FlowVisualization = ({
       .append("circle")
       .attr("cx", sourceX)
       .attr("cy", centerY)
-      .attr("r", 8)
+      .attr("r", 12)
       .attr("fill", "#ffffff")
       .attr("stroke", "#374151")
-      .attr("stroke-width", 2);
+      .attr("stroke-width", 4);
 
     // Draw flows
     flows.forEach((flow, index) => {

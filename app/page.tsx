@@ -71,19 +71,14 @@ export default function Home() {
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Flow Visualization */}
       <div className="lg:col-span-2">
-        <div className="bg-gray-800 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-white mb-6">
-            Distribution Flow
-          </h3>
-          {routes && routes[0] && (
-            <FlowVisualization
-              recipients={routes[0].routes}
-              totalBalance={formatEther(splitBalance?.balance as bigint)}
-              allocations={routes[0].allocations}
-              rootSplits={routes[0].rootSplits as string}
-            />
-          )}
-        </div>
+        {routes && routes[0] && (
+          <FlowVisualization
+            recipients={routes[0].routes}
+            totalBalance={formatEther(splitBalance?.balance as bigint)}
+            allocations={routes[0].allocations}
+            rootSplits={routes[0].rootSplits as string}
+          />
+        )}
       </div>
     </main>
   );
